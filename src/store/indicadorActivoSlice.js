@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const almacenamientoSlice = createSlice({
   name: "almacenamiento",
   initialState: {
+    cargando: null,
     listadoCompleto: null,
     editando: false,
     keyBd: null,
@@ -45,12 +46,31 @@ export const almacenamientoSlice = createSlice({
     setListadoCompleto: (state, { payload }) => {
       state.listadoCompleto = payload;
     },
+    setLoading: (state, { payload }) => {
+      state.cargando = payload;
+    },
+    clearAll : (state) => {
+      state.keyBd = null;
+      state.id = null;
+      state.nombreIndicador = null;
+      state.codigoIndicador = null;
+      state.fechaIndicador = null;
+      state.origenIndicador = null;
+      state.unidadMedidaIndicador = null;
+      state.valorIndicador = null;
+      state.tiempoIndicador = null;
+      state.cargando; null;
+      state.listadoCompleto; null;
+      state.editando; false;
+    },
   },
 });
 
 export const {
+  clearAll,
   setActiveProduct,
   clearActiveProduct,
   setEditando,
   setListadoCompleto,
+  setLoading,
 } = almacenamientoSlice.actions;

@@ -3,26 +3,26 @@ import { RowTable } from "../components/RowTable";
 import { collection, getDocs } from "firebase/firestore";
 import { FirebaseBD } from "../firebase/config";
 import { useDispatch, useSelector } from "react-redux";
-import { setListadoCompleto } from "../store/indicadorActivoSlice";
-import '../styles/Tabla.style.css'
+import { clearAll, setListadoCompleto, setLoading } from "../store/indicadorActivoSlice";
+import "../styles/Tabla.style.css";
 
 export const Tabla = () => {
-  const dispatch = useDispatch();
   const { listadoCompleto } = useSelector((state) => state.almacenamiento);
+  const dispatch = useDispatch();
 
   const getLista = async () => {
-    const listaIndicadoresId = [];
-    const datos = await getDocs(collection(FirebaseBD, "indicado"));
+    dispatch(clearAll());
+    
+    dispatch(setLoading(true));
+    const listaIndicadores = [];
+    const datos = await getDocs(collection(FirebaseBD, "indicadores"));
     datos.forEach((datos) => {
       const newItem = { ...datos.data() };
-      listaIndicadoresId.push(newItem);
+      listaIndicadores.push(newItem);
     });
-    dispatch(setListadoCompleto(listaIndicadoresId));
+    dispatch(setListadoCompleto(listaIndicadores));
+    dispatch(setLoading(false));
   };
-
-  useEffect(() => {
-    getLista();
-  }, []);
 
   return (
     <div className="table-main">
@@ -38,6 +38,7 @@ export const Tabla = () => {
             <th>Tiempo Indicador</th>
             <th>Origen Indicador</th>
             <th>Opciones</th>
+            <th><button onClick={() => getLista()} >Actualizar</button></th>
           </tr>
         </thead>
         <tbody>

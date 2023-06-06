@@ -5,8 +5,13 @@ import { Graficos } from "../pages/Graficos";
 import { Tabla } from "../pages/Tabla";
 import { Navbar } from "../components/Navbar";
 import { CrudInputData } from "../pages/CrudInputData";
+import { useSelector } from "react-redux";
+import { Loading } from "../components/Loading";
 
 function Approuter() {
+  const { cargando } = useSelector((state) => state.almacenamiento);
+  if (cargando) return <Loading />;
+
   return (
     <>
       <Navbar />

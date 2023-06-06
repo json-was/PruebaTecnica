@@ -15,6 +15,9 @@ export const Navbar = () => {
         <Link className="link-item" to="/tabla">
           Ver tabla
         </Link>
+        <Link className="link-item" to="/graficos">
+          Graficos
+        </Link>
       </ul>
     </div>
   );

@@ -179,6 +179,7 @@ export const CrudInputData = () => {
               </td>
               <td>
                 <input
+                disabled
                   // Asignación de que es tipo 'number'
                   type="number"
                   placeholder="ej: 5990"
@@ -186,8 +187,8 @@ export const CrudInputData = () => {
                   // Register es el responsable de capturar el precio y hacerlo una variable.
                   {...register("valorIndicador", {
                     // Restringir que tiene que haber escrito en algo.
-                    required: true,
-                    validate: (value) => value > 0,
+                    // required: true,
+                    validate: (value) => value >= 0,
                     valueAsNumber: true,
                   })}
                 />

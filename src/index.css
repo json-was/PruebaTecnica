@@ -351,3 +351,33 @@ template {
 *{
   font-family: monospace, monospace;
 }
+
+
+.main-loading {
+  z-index: 10000;
+  background-color: orange;
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.spinner {
+  border: 0.5rem solid rgb(255, 204, 111);
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  border-left-color: #fff;
+  animation: spin 1s ease infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
