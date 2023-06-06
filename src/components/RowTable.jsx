@@ -19,8 +19,8 @@ export const RowTable = ({ data }) => {
   // Borrara una fila con sus datos correspondientes
   // en la base de datos
   const borrar = () => {
-    // deleteObjectBD(data.key);
-    // dispatch(clearActiveProduct())
+    deleteObjectBD(data.keyBd);
+    dispatch(clearActiveProduct())
   };
 
   return (

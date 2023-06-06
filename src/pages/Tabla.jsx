@@ -4,6 +4,7 @@ import { collection, getDocs } from "firebase/firestore";
 import { FirebaseBD } from "../firebase/config";
 import { useDispatch, useSelector } from "react-redux";
 import { setListadoCompleto } from "../store/indicadorActivoSlice";
+import '../styles/Tabla.style.css'
 
 export const Tabla = () => {
   const dispatch = useDispatch();
@@ -24,8 +25,8 @@ export const Tabla = () => {
   }, []);
 
   return (
-    <div>
-      <table>
+    <div className="table-main">
+      <table className="table-box table-container">
         <thead>
           <tr>
             <th>ID</th>
