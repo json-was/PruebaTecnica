@@ -12,7 +12,7 @@ export const RowTable = ({ data }) => {
   // de la respectiva key que haya tomado
   const editar = () => {
     dispatch(setEditando(true))
-    navigate(`/crud/${data.key}`);
+    navigate(`/crud/${data.keyBd}`);
     dispatch(setActiveProduct({ ...data }));
   };
 
@@ -24,7 +24,7 @@ export const RowTable = ({ data }) => {
   };
 
   return (
-    <tr>
+    <tr key={data.keyBd}>
       <td>{data.id}</td>
       <td>{data.nombreIndicador}</td>
       <td>{data.codigoIndicador}</td>

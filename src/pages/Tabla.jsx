@@ -2,22 +2,21 @@ import React, { useEffect, useState } from "react";
 import { RowTable } from "../components/RowTable";
 import { collection, getDocs } from "firebase/firestore";
 import { FirebaseBD } from "../firebase/config";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setListadoCompleto } from "../store/indicadorActivoSlice";
 
 export const Tabla = () => {
   const dispatch = useDispatch();
-  const [listaProductos, setListaProductos] = useState([]);
+  const { listadoCompleto } = useSelector((state) => state.almacenamiento);
 
   const getLista = async () => {
-    const productListId = [];
+    const listaIndicadoresId = [];
     const datos = await getDocs(collection(FirebaseBD, "indicado"));
     datos.forEach((datos) => {
       const newItem = { ...datos.data() };
-      productListId.push(newItem);
+      listaIndicadoresId.push(newItem);
     });
-    setListaProductos(productListId);
-    dispatch(setListadoCompleto(productListId));
+    dispatch(setListadoCompleto(listaIndicadoresId));
   };
 
   useEffect(() => {
@@ -41,9 +40,9 @@ export const Tabla = () => {
           </tr>
         </thead>
         <tbody>
-          {listaProductos !== undefined &&
-            listaProductos.map((data) => {
-              return <RowTable key={data.key} data={data} />;
+          {listadoCompleto !== null &&
+            listadoCompleto.map((data) => {
+              return <RowTable key={data.keyBd} data={data} />;
             })}
         </tbody>
       </table>

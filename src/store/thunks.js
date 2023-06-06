@@ -11,7 +11,7 @@ export const addNewObjectBD = async (data) => {
 
 export const updateObjectBD = async (data, key) => {
   const docIndicador = doc(FirebaseBD, "indicado", key);
-  return updateDoc(docIndicador, {
+  return await updateDoc(docIndicador, {
     ...data,
   });
 };

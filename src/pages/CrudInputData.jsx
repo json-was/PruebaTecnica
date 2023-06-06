@@ -19,7 +19,7 @@ const defaultValues = {
 export const CrudInputData = () => {
   const {
     editando,
-    key,
+    keyBd,
     id,
     nombreIndicador,
     codigoIndicador,
@@ -42,16 +42,16 @@ export const CrudInputData = () => {
   const onSubmit = (data) => {
     // Si editando esta en false, agregara un dato
     // y limpiara nuestro store de redux
-    dispatch(clearActiveProduct());
-    if (!editando) {
-      addNewObjectBD(data);
-      dispatch(setEditando(false));
-    }
+    if (!editando) addNewObjectBD(data);
     // Si editando esta en false, agregara un dato
-    if (editando) updateObjectBD(data, key);
+    if (editando) {
+      updateObjectBD(data, keyBd);
+      dispatch(setEditando(false));
+      dispatch(clearActiveProduct());
+    }
 
     return setTimeout(() => {
-      navigate("/listadoIndicador");
+      navigate("/inicio");
     }, 1000);
   };
 
@@ -202,7 +202,7 @@ export const CrudInputData = () => {
               <tr>
                 <td></td>
                 <td>
-                  <button type="submit">Guardar cambios</button>
+                  <button type="submit">{editando ? "Guardar cambios" : "Agregar dato"}</button>
                 </td>
                 <td></td>
               </tr>

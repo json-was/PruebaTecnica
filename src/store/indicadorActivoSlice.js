@@ -5,7 +5,7 @@ export const almacenamientoSlice = createSlice({
   initialState: {
     listadoCompleto: null,
     editando: false,
-    key: null,
+    keyBd: null,
     id: null,
     nombreIndicador: null,
     codigoIndicador: null,
@@ -18,7 +18,7 @@ export const almacenamientoSlice = createSlice({
 
   reducers: {
     setActiveProduct: (state, { payload }) => {
-      state.key = payload.key;
+      state.keyBd = payload.keyBd;
       state.id = payload.id;
       state.nombreIndicador = payload.nombreIndicador;
       state.codigoIndicador = payload.codigoIndicador;
@@ -29,7 +29,7 @@ export const almacenamientoSlice = createSlice({
       state.tiempoIndicador = payload.tiempoIndicador;
     },
     clearActiveProduct: (state) => {
-      state.key = null;
+      state.keyBd = null;
       state.id = null;
       state.nombreIndicador = null;
       state.codigoIndicador = null;
@@ -38,7 +38,6 @@ export const almacenamientoSlice = createSlice({
       state.unidadMedidaIndicador = null;
       state.valorIndicador = null;
       state.tiempoIndicador = null;
-      state.editando = null;
     },
     setEditando: (state, { payload }) => {
       state.editando = payload;
