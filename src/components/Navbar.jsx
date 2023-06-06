@@ -10,6 +10,9 @@ export const Navbar = () => {
       <li>
         <Link to="/crud">Crud</Link>
       </li>
+      <li>
+        <Link to="/tabla">Ver tabla</Link>
+      </li>
     </ul>
   );
 };

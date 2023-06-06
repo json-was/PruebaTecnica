@@ -1,7 +1,8 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
-import { addNewObjectBD } from "../store/thunks";
+import { addNewObjectBD, updateObjectBD } from "../store/thunks";
+import { useNavigate } from "react-router-dom";
 
 const defaultValues = {
   id: 0,
@@ -15,7 +16,8 @@ const defaultValues = {
 };
 
 export const CrudInputData = () => {
-  const { editando } = useSelector((state) => state.almacenamiento);
+  const { editando, key } = useSelector((state) => state.almacenamiento);
+  const navigate = useNavigate();
 
   const {
     register,
@@ -25,9 +27,15 @@ export const CrudInputData = () => {
   } = useForm({ defaultValues });
 
   const onSubmit = (data) => {
+    // Si editando esta en false, agregara un dato
     if (!editando) {
-      addNewObjectBD(data);
+      return addNewObjectBD(data);
     }
+    // Si editando esta en false, agregara un dato
+    updateObjectBD(data, key);
+    return setTimeout(() => {
+      navigate("/listadoIndicador");
+    }, 1000);
   };
 
   return (
