@@ -12,7 +12,7 @@ function Approuter() {
       <Routes>
         <Route path="/*" element={<Inicio />} />
         <Route path="/crud" element={<CrudInputData />} />
-        {/* <Route path="/crud:id" element={<CrudInputData />} /> */}
+        <Route path="/crud:id" element={<CrudInputData />} />
         <Route path="/graficos" element={<Graficos />} />
 
       </Routes>

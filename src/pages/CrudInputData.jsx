@@ -1,6 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
+import { addNewObjectBD } from "../store/thunks";
 
 const defaultValues = {
   id: 0,
@@ -23,7 +24,11 @@ export const CrudInputData = () => {
     setValue,
   } = useForm({ defaultValues });
 
-  const onSubmit = (data) => {};
+  const onSubmit = (data) => {
+    if (!editando) {
+      addNewObjectBD(data);
+    }
+  };
 
   return (
     <>
