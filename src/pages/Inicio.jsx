@@ -42,8 +42,8 @@ export const Inicio = () => {
     <div className="main-inicio">
       <h1 style={{ fontSize: "4rem", color: "#fff" }}>Bienvenido 👋</h1>
       {/* <button onClick={() => RecopilarInformacion()}>
-          Presioname para recolectar información
-        </button> */}
+        Presioname para recolectar información
+      </button> */}
       <button onClick={() => getLista()}>
         Si no aparece la información en las tablas ¡Presioname! 😁
       </button>
