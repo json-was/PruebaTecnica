@@ -1,7 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { RowTable } from "../components/RowTable";
+import { collection, getDocs } from "firebase/firestore";
+import { FirebaseBD } from "../firebase/config";
+import { useDispatch } from "react-redux";
+import { setListadoCompleto } from "../store/indicadorActivoSlice";
 
 export const Tabla = () => {
+  const dispatch = useDispatch();
+  const [listaProductos, setListaProductos] = useState([]);
+
+  const getLista = async () => {
+    const productListId = [];
+    const datos = await getDocs(collection(FirebaseBD, "indicado"));
+    datos.forEach((datos) => {
+      const newItem = { ...datos.data() };
+      productListId.push(newItem);
+    });
+    setListaProductos(productListId);
+    dispatch(setListadoCompleto(productListId));
+  };
+
+  useEffect(() => {
+    getLista();
+  }, []);
+
   return (
     <div>
       <table>
@@ -19,7 +41,10 @@ export const Tabla = () => {
           </tr>
         </thead>
         <tbody>
-          <RowTable />
+          {listaProductos !== undefined &&
+            listaProductos.map((data) => {
+              return <RowTable key={data.key} data={data} />;
+            })}
         </tbody>
       </table>
     </div>

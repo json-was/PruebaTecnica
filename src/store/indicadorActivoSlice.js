@@ -4,7 +4,7 @@ export const almacenamientoSlice = createSlice({
   name: "almacenamiento",
   initialState: {
     listadoCompleto: null,
-    editando: null,
+    editando: false,
     key: null,
     id: null,
     nombreIndicador: null,
@@ -43,8 +43,15 @@ export const almacenamientoSlice = createSlice({
     setEditando: (state, { payload }) => {
       state.editando = payload;
     },
+    setListadoCompleto: (state, { payload }) => {
+      state.listadoCompleto = payload;
+    },
   },
 });
 
-export const { setActiveProduct, clearActiveProduct, setEditando } =
-  almacenamientoSlice.actions;
+export const {
+  setActiveProduct,
+  clearActiveProduct,
+  setEditando,
+  setListadoCompleto,
+} = almacenamientoSlice.actions;

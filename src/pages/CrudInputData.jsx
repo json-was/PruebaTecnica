@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addNewObjectBD, updateObjectBD } from "../store/thunks";
 import { useNavigate } from "react-router-dom";
+import { clearActiveProduct, setEditando } from "../store/indicadorActivoSlice";
 
 const defaultValues = {
   id: 0,
@@ -16,8 +17,20 @@ const defaultValues = {
 };
 
 export const CrudInputData = () => {
-  const { editando, key } = useSelector((state) => state.almacenamiento);
+  const {
+    editando,
+    key,
+    id,
+    nombreIndicador,
+    codigoIndicador,
+    fechaIndicador,
+    origenIndicador,
+    unidadMedidaIndicador,
+    valorIndicador,
+    tiempoIndicador,
+  } = useSelector((state) => state.almacenamiento);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const {
     register,
@@ -28,15 +41,35 @@ export const CrudInputData = () => {
 
   const onSubmit = (data) => {
     // Si editando esta en false, agregara un dato
+    // y limpiara nuestro store de redux
+    dispatch(clearActiveProduct());
     if (!editando) {
-      return addNewObjectBD(data);
+      addNewObjectBD(data);
+      dispatch(setEditando(false));
     }
     // Si editando esta en false, agregara un dato
-    updateObjectBD(data, key);
+    if (editando) updateObjectBD(data, key);
+
     return setTimeout(() => {
       navigate("/listadoIndicador");
     }, 1000);
   };
+
+  useEffect(() => {
+    // Validando si esque está editanto.
+    // Si es true, hara un set en el formulario con los
+    // datos correspondientes
+    if (editando) {
+      setValue("id", id);
+      setValue("nombreIndicador", nombreIndicador);
+      setValue("codigoIndicador", codigoIndicador);
+      setValue("fechaIndicador", fechaIndicador);
+      setValue("origenIndicador", origenIndicador);
+      setValue("unidadMedidaIndicador", unidadMedidaIndicador);
+      setValue("valorIndicador", valorIndicador);
+      setValue("tiempoIndicador", tiempoIndicador);
+    }
+  }, []);
 
   return (
     <>

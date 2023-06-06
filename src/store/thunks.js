@@ -2,7 +2,7 @@ import { addDoc, collection, deleteDoc, doc, updateDoc } from "firebase/firestor
 import { FirebaseBD } from "../firebase/config";
 
 export const addNewObjectBD = async (data) => {
-  return await addDoc(collection(FirebaseBD, "indicadores"), {
+  return await addDoc(collection(FirebaseBD, "indicado"), {
     ...data,
   }).then(async (respuesta) => {
     updateDoc(respuesta, { keyBd: respuesta.id });
